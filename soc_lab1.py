@@ -18,4 +18,19 @@ for user_id, data in siem_logs.items():
         username = data['username']
         print(f"[CRITICAL] Account locked for user: {username}")
 
+# Task 2: Malformed Entry handling - check for missing keys
 
+required_fields = ['username', 'status', 'failed_attempts']
+for user_id, data in siem_logs.items():
+    missing_field =[]
+    for field in required_fields:
+        if field not in data:
+            missing_field.append(field)
+    if missing_field:
+        print(f"[WARNING] Malformed entry for user_id: {user_id}"
+        print(f"[missing fields as missing field]")
+        if "failed_attempts" in missing_field:
+            print(f"[WARNING] Missing 'failed_attempts' for user_id: {user_id}")
+
+        else:
+            print(f"[Ok] valid entry for user_id: {user_id}")
