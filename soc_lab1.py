@@ -1,5 +1,5 @@
 # SOC Lab: Automating Security Workflows with Python Dictionaries
-
+#Attemot to pull in VS
 siem_logs = {
     'user_001': {'username': 'belissa', 'status': 'active', 'failed_attempts': 1},
     'user_002': {'username': 'juani', 'status': 'locked', 'failed_attempts': 15},
