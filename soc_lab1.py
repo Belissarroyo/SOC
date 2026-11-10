@@ -18,19 +18,15 @@ for user_id, data in siem_logs.items():
         username = data['username']
         print(f"[CRITICAL] Account locked for user: {username}")
 
-# Task 2: Malformed Entry handling - check for missing keys
+# Task 2: Data enrichment - add 2FA flag to every account
+for data in siem_logs.values():
+    data['2FA_enabled'] = True
 
-required_fields = ['username', 'status', 'failed_attempts']
-for user_id, data in siem_logs.items():
-    missing_field =[]
-    for field in required_fields:
-        if field not in data:
-            missing_field.append(field)
-    if missing_field:
-        print(f"[WARNING] Malformed entry for user_id: {user_id}"
-        print(f"[missing fields as missing field]")
-        if "failed_attempts" in missing_field:
-            print(f"[WARNING] Missing 'failed_attempts' for user_id: {user_id}")
-
-        else:
-            print(f"[Ok] valid entry for user_id: {user_id}")
+# Task 3: Final audit for Senior SOC Engineers
+for user_id, details in siem_logs.items():
+    username = details['username']
+    status = details['status']
+    mfa = details['2FA_enabled']
+    print(f"Audit Complete - ID: {user_id} | "
+          f"Username: {username} | "
+          f"Status: {status} | 2FA: {mfa}")
